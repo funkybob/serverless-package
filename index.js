@@ -31,8 +31,10 @@ class Package {
     }
 
     packageFiles() {
-        config = this.serverless.service;
+        const config = this.serverless.service;
+
         if(!config.package.artifact) { return; }
+
         const output = fs.createWriteStream(config.package.artifact);
         output.on('open', () => {
             const archive = archiver('zip', {zlib: {level: 9, memLevel: 9}});
