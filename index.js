@@ -25,22 +25,20 @@ class Package {
 
         this.hooks = {
             'before:package:package': () => Promise.resolve().then(this.validate.bind(this)),
-            'package:package': () => new Promise(this.packageFiles.bind(this)),
-            'deploy:createDeploymentArtifacts': () => new Promise(this.packageFiles.bind(this)),
+            'package:package': () => Promise.resolve().then(this.packageFiles.bind(this)),
+            'deploy:createDeploymentArtifacts': () => Promise.resolve().then(this.packageFiles.bind(this))
         }
     }
 
-    packageFiles(resolve, reject) {
+    packageFiles() {
         const config = this.serverless.service;
-
-        if(!config.package.artifact) { reject('package.artifact not defined'); }
+        const archive = archiver('zip', {zlib: {level: 9, memLevel: 9}});
 
         this.serverless.cli.log('Packaging service...');
 
         const output = fs.createWriteStream(config.package.artifact);
         output.on('open', () => {
-            const archive = archiver('zip', {zlib: {level: 9, memLevel: 9}});
-            archive.pipe(output)
+            archive.pipe(output);
 
             for(let root in config.custom.package.sources) {
                 let fileList = glob.sync(config.custom.package.sources[root], {cwd: root});
@@ -57,7 +55,10 @@ class Package {
                 }
             }
             archive.finalize();
-            resolve();
+        });
+        return new Promise((resolve, reject) => {
+            output.on('close', () => resolve());
+            archive.on('error', (err) => reject());
         });
     }
 
