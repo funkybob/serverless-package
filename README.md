@@ -1,6 +1,14 @@
 # serverless-package
 An alternative approach to packaging for Serverless
 
+## Why?
+
+Unlike most, I write my serverless apps in Python.
+
+When including third party packages, it can be quite messy, especially for the output of `git status`.
+
+This approach allows me to install them into a dist/ directory using "pip install -t dist/ ..." and then .gitignore that directory.
+
 # Usage
 
 1. Add "serverless-packages" to your plugins list.
