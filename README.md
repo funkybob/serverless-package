@@ -34,10 +34,13 @@ custom:
   package:
     sources:
       "./src/":
-        - "*.py"
+        - "**"
+        - "!**/*.pyc"
         - "templates/**"
       "./dist/":
-        - "**/**/*.py"
+        - "**"
+        - "!**/*.pyc"
+        - "!*@(dist|egg)-info/**"
 ```
 
 # Command
