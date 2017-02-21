@@ -31,3 +31,13 @@ custom:
       "./dist/":
         - "**/**/*.py"
 ```
+
+# Command
+
+Additionally, this adds the "package" command.
+
+```
+sls package
+```
+
+This will only run the `serverless-package` command, not the built in packaging.
