@@ -40,9 +40,9 @@ class Package {
 
             for(let root in config.custom.package.sources) {
                 let fileList = glob.sync(config.custom.package.sources[root], {cwd: root});
-                console.log(fileList);
                 for(let fileName of fileList) {
                     const fullPath = path.join(root, fileName);
+                    console.log(fullPath + ' -> ' + fileName);
                     const stats = fs.statSync(fullPath);
                     if(!stats.isDirectory(fullPath)) {
                         archive.append(fs.createReadStream(fullPath), {
