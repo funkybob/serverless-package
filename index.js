@@ -35,6 +35,8 @@ class Package {
 
         if(!config.package.artifact) { return; }
 
+        this.serverless.cli.log('Packaging service...');
+
         const output = fs.createWriteStream(config.package.artifact);
         output.on('open', () => {
             const archive = archiver('zip', {zlib: {level: 9, memLevel: 9}});
@@ -44,7 +46,7 @@ class Package {
                 let fileList = glob.sync(config.custom.package.sources[root], {cwd: root});
                 for(let fileName of fileList) {
                     const fullPath = path.join(root, fileName);
-                    console.log(fullPath + ' -> ' + fileName);
+                    this.serverless.cli.log(fullPath + ' -> ' + fileName);
                     const stats = fs.statSync(fullPath);
                     if(!stats.isDirectory(fullPath)) {
                         archive.append(fs.createReadStream(fullPath), {
