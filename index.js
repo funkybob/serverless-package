@@ -51,7 +51,7 @@ class Package {
                     if(!stats.isDirectory(fullPath)) {
                         archive.append(fs.createReadStream(fullPath), {
                             name: fileName,
-                            model: stats.mode
+                            mode: stats.mode
                         });
                     }
                 }
