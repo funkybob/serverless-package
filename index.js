@@ -35,7 +35,7 @@ class Package {
         if(!config.package.artifact) { return; }
         const output = fs.createWriteStream(config.package.artifact);
         output.on('open', () => {
-            const archive = archiver('zip', {});
+            const archive = archiver('zip', {zlib: {level: 9, memLevel: 9}});
             archive.pipe(output)
 
             for(let root in config.custom.package.sources) {
