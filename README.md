@@ -34,13 +34,12 @@ custom:
   package:
     sources:
       "./src/":
-        - "**"
-        - "!**/*.pyc"
-        - "templates/**"
+        - "**"          # Include everything
+        - "!**/*.pyc"   # Except the .pyc files
       "./dist/":
-        - "**"
-        - "!**/*.pyc"
-        - "!*@(dist|egg)-info/**"
+        - "**"                      # Include everything
+        - "!**/*.pyc"               # Except .pyc files 
+        - "!*@(dist|egg)-info/**"   # Or pip's book-keeping files
 ```
 
 # Command
