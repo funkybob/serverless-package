@@ -1,12 +1,12 @@
 {
   "name": "serverless-package",
   "version": "0.1.0",
-  "description": "",
+  "description": "An alternative approach to packaging for Serverless",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Curtis Maloney",
   "license": "ISC",
   "devDependencies": {
     "npm": "^4.2.0"
