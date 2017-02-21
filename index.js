@@ -24,16 +24,16 @@ class Package {
         }
 
         this.hooks = {
-            'before:package:package': this.validate.bind(this),
-            'package:package': this.packageFiles.bind(this),
-            'deploy:createDeploymentArtifacts': this.packageFiles.bind(this),
+            'before:package:package': () => Promise.resolve().then(this.validate.bind(this)),
+            'package:package': () => new Promise(this.packageFiles.bind(this)),
+            'deploy:createDeploymentArtifacts': () => new Promise(this.packageFiles.bind(this)),
         }
     }
 
-    packageFiles() {
+    packageFiles(resolve, reject) {
         const config = this.serverless.service;
 
-        if(!config.package.artifact) { return; }
+        if(!config.package.artifact) { reject('package.artifact not defined'); }
 
         this.serverless.cli.log('Packaging service...');
 
@@ -57,6 +57,7 @@ class Package {
                 }
             }
             archive.finalize();
+            resolve();
         });
     }
 
