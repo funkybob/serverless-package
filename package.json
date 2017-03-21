@@ -9,6 +9,7 @@
   "author": "Curtis Maloney",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^3.18.0",
     "npm": "^4.2.0"
   },
   "dependencies": {
