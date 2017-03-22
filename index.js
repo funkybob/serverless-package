@@ -50,7 +50,7 @@ class Package {
         let fileList = glob.sync(config.custom.package.sources[root], {cwd: root});
         for(let fileName of fileList) {
           const fullPath = path.join(root, fileName);
-          (!!this.options.verbose) && this.serverless.cli.log(fullPath + ' -> ' + fileName);
+          (!!this.options.verbose) && this.serverless.cli.log(`${fullPath} -> ${fileName}`);
           const stats = fs.statSync(fullPath);
           if(!stats.isDirectory(fullPath)) {
             archive.append(fs.createReadStream(fullPath), {
