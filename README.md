@@ -20,7 +20,7 @@ This approach allows me to install them into a dist/ directory using "pip instal
 1. Add a custom.package section
 
    This is a map of root paths to lists of glob-all terms.
-   
+
 # Example
 
 ```
@@ -38,7 +38,7 @@ custom:
         - "!**/*.pyc"   # Except the .pyc files
       "./dist/":
         - "**"                      # Include everything
-        - "!**/*.pyc"               # Except .pyc files 
+        - "!**/*.pyc"               # Except .pyc files
         - "!*@(dist|egg)-info/**"   # Or pip's book-keeping files
 ```
 
