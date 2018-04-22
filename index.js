@@ -15,24 +15,9 @@ class Package {
 
     Object.assign(this, validate);
 
-    this.commands = {
-      'package': {
-        lifecycleEvents: [
-          'package'
-        ],
-        options: {
-          verbose: {
-            usage: 'Increase verbosity',
-            shortcut: 'v'
-          }
-        }
-      }
-    };
-
     this.hooks = {
-      'before:package:package': () => Promise.resolve().then(this.validate.bind(this)),
-      'package:package': () => Promise.resolve().then(this.packageFiles.bind(this)),
-      'deploy:createDeploymentArtifacts': () => Promise.resolve().then(this.packageFiles.bind(this))
+      'before:package:createDeploymentArtifacts': () => Promise.resolve().then(this.validate.bind(this)),
+      'package:createDeploymentArtifacts': () => Promise.resolve().then(this.packageFiles.bind(this))
     };
   }
 
